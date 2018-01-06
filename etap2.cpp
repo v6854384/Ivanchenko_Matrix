@@ -211,10 +211,7 @@ int main(int argc, char *argv[]){
     				cout << "1. Print matrix" << endl;
     				cout << "2. Sum matrixs" << endl;
     				cout << "3. Multiplacation matrixs" << endl;
-    				cout << "4. Transpose matrix" << endl;
-    				cout << "5. Save to file" << endl;
-    				cout << "6. Load from file" << endl;
-    				cout << "7. Sort matrix" << endl;
+    				cout << "4. Transpose matrix" << endl;    				
 				cin >> ch;
 				switch(ch){
 					case 1:
