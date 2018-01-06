@@ -277,9 +277,8 @@ int main(int argc, char *argv[]){
     				cout << "3. Multiplacation matrixs" << endl;
     				cout << "4. Transpose matrix" << endl;
     				cout << "5. Save to file" << endl;
-    				cout << "6. Load from file" << endl;
-    				cout << "7. Sort matrix" << endl;
-				cin >> ch;
+    				cout << "6. Load from file" << endl; 				
+			        cin >> ch;
 				switch(ch){
 					case 1:
 						print_matrix(a, n, m);
