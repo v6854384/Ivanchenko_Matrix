@@ -102,13 +102,7 @@ int main(int argc, char *argv[]){
 				int ch = 0;
 				cout << endl;
 				cout << "Select operation:" << endl;
-    				cout << "1. Print matrix" << endl;
-    				cout << "2. Sum matrixs" << endl;
-    				cout << "3. Multiplacation matrix" << endl;
-    				cout << "4. Transpose matrix" << endl;
-    				cout << "5. Save to file" << endl;
-    				cout << "6. Load from file" << endl;
-    				cout << "7. Sort matrix" << endl;
+    				cout << "1. Print matrix" << endl;    				
 				cin >> ch;
 				if ( ch == 1 ){
 					print_matrix(a, n, m);
