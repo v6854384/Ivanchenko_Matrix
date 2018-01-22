@@ -1,10 +1,11 @@
-
 #include <iostream>
+//Чтобы можно было выводить текст с помощью cout и вводить с помощью cin
 #include <cstring> 
-#include <cstdlib>
-#include <string.h>
+//Чтобы работала функции strlen
 #include <fstream>
+//Для работы с файлами, конкретно для ifstream
 using namespace std;
+//Для того, чтобы не писать std:: перед каждой библиотечной функцией 
 
 void print_matrix(int **&a, int &n, int &m){
 	for (int i = 0; i < n; i++){
@@ -311,37 +312,54 @@ void sort_matrix(int **&a, int &n, int &m){
 }
 
 int main(int argc, char *argv[]){
+	//С этого места запускается программа
+	//В argc количество входных параметров
+	//argv - массив этих параметров
 	int n = 0, m = 0;
+	//n - кол-во строк, m - кол-во стобцов
 	if (argc == 1) cout << "You haven`t entered any data" << endl;
 	if (argc == 2) cout << "You haven`t entered the matrix" << endl;
 	if (argc > 2){
 		int g = 0;
+		//Для того чтобы можно было бегать по строке
 		bool flagn = true, flagm = true, probel = false, zapyataya = false;
+		//flagn и flagm = false когда n и m неправильные.
 		while (argv[1][g] != 'x'){
-			if ((argv[1][g] >= '0') && (argv[1][g] <= '9')) n = n * 10 + argv[1][g] - 48;
+			//Здесь идет считывание размера матрицы n
+			if ((argv[1][g] >= '0') && (argv[1][g] <= '9')) n = n * 10 + argv[1][g] - '0';
+			//Проверяем что параметр, который мы берем является цифрой
+			//Далее, мы берем "n", которому присваиваем значение взятого параметра
 			else flagn = false;
 			g++;
 		}
 		g++;
 		while (g < strlen(argv[1])){
-			if ((argv[1][g] >= '0') && (argv[1][g] <= '9')) m = m * 10 + argv[1][g] - 48;
+			//Здесь идет считывание размера матрицы m
+			//Проверка на то, что до тех пор пока мы не дайдем до конца взятой строки, будет выполняться условие:
+			if ((argv[1][g] >= '0') && (argv[1][g] <= '9')) m = m * 10 + argv[1][g] - '0';
 			else flagm = false;
 			g++;
 		}
 		for (int i = 0; i < strlen(argv[2]); i++){
+			//Этот цикл нужен для того, чтобы понять как будут заданы параметры
 			if (argv[2][i] == ','){
 				zapyataya = true;
 			}
 		}
 		if (zapyataya == false) probel = true;
 		
-		int **a = new int*[n], counta = 0;
+		//n элементов в массиве, каждый из которых указывает какую-то (int) область памяти
+		//выделяю память для указателя на столбцы
+		//выделяю память на сами стобцы
+		int **a = new int*[n], counta = 0;		
 		for(int i = 0; i < n; i++)
+			//выделяем по i-ый столбец память з
 			a[i]=new int[m];
+		//далее мы указываем что каждый элемент матрицы равен нулю
 		for (int i = 0; i < n; i++)
 			for (int j = 0; j < m; j++)
 				a[i][j] = 0;
-		
+			ё
 		int inpn = 0, inpm = 0, v = 0;
 		bool flag_matrix = true, flag_end_of_matrix = false, flag_total_count = true;
 		if (zapyataya == true){
@@ -434,4 +452,6 @@ int main(int argc, char *argv[]){
 			}
 		}
 	}
+	return = 0;
+	//Для того чтобы программа сообщила оперативной памяти успешное завершение работы
 }
