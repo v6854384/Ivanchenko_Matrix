@@ -7,7 +7,7 @@
 using namespace std;
 //Для того, чтобы не писать std:: перед каждой библиотечной функцией 
 
-void print_matrix(int **&a, int &n, int &m){
+void print_matrix(int **a, int n, int m){ //объявление функции, которая не возвращает никаких значений
 	for (int i = 0; i < n; i++){
 		for (int j = 0; j < m; j++){
 			cout << a[i][j] << " ";
@@ -16,86 +16,56 @@ void print_matrix(int **&a, int &n, int &m){
 	}
 }
 
-void delete_matrix(int **&a, int &n){
+void delete_matrix(int **a, int &n, int &m){
 	for (int i = 0; i < n; i++) delete[] a[i];
 	delete [] a;
+	n = 0; 
+	m = 0;
 }
 
-void sum_matrixs(int **&a, int &n, int &m){
-	cout << "Input new matrix " << n << "x" << m << endl;
-	int **b = new int*[n];
-	for (int i = 0; i < n; i++)
-		b[i] = new int[m];
+void sum_matrixs(int **a, int n, int m){
+	cout << "Input new matrix" << n << "x" << m << endl;	
 	for (int i = 0; i < n; i++){
 		for (int j = 0; j < m; j++){
-			cin >> b[i][j];
-			a[i][j] = a[i][j] + b[i][j];
+			int v; //в эту переменную вводится очередной элемент новой матрицы
+			cin >> v;
+			a[i][j] = a[i][j] + v;
 		}
-	}
-	delete_matrix(b, n);
+	}	
 }
 
-void multiplacation_matrixs(int **&a, int &n, int &m){
-	cout << "Input a size of new matrix" << endl;
-	int m1 = 0, k = 0;
-	char size_mult[256], nmult[256], mmult[256];
-	cin >> size_mult;
-	int l = 0, l1 = 0;
-	bool flag_size = true;
-	while (size_mult[l] != 'x'){
-		nmult[l] = size_mult[l];
-		l++;
+void multiplacation_matrixs(int **a, int n, int &m){
+	cout << "Input the number of columns of new matrix" << endl;
+	
+	int k;
+		cin >> k;
+	
+	cout << "Input matrix" << endl;
+	
+	int **b = new int*[m];
+		for (int i = 0; i < m; i++){
+   		 b[i] = new int[k];
 	}
-	l++;
-	while (l < strlen(size_mult)){
-		mmult[l1] = size_mult[l];
-		l++;
-		l1++;
+	
+	int **c = new int*[m];
+		for (int i = 0; i < m; i++){
+   		 c[i] = new int[k];
 	}
-	m1 = atoi(nmult);
-	k = atoi(mmult);
-	if (m1 == m){
-		int **c = new int*[m1];
-		for (int i = 0; i < m1; i++)
-			c[i] = new int[k];
-		cout << "Input new matrix " << m1 << "x" << k << endl;
-		for (int i = 0; i < m1; i++){
-			for (int j = 0; j < k; j++){
-				cin >> c[i][j];
-			}	
-		}
-		int **a1 = new int*[n];
-		for (int i = 0; i < n; i++)
-			a1[i]=new int[m];
-		for (int i = 0; i < n; i++){
-			for (int j = 0; j < m; j++){
-				a1[i][j] = a[i][j];
-			}
-		}
-		delete_matrix(a, n);
-		m = k;
-		a = new int*[n];
-		for (int i = 0; i < n; i++)
-			a[i] = new int[m];
-		for (int i = 0; i < n; i++){
-			for (int j = 0; j < m; j++){
-				a[i][j] = 0;
-			}
-		}
+	
+	for (int i = 0; i < m; i++) { 
+        	for (int j = 0; j < k; j++) { 
+            		cin >> b[i][j];
 
-		for (int i = 0; i < n; i++){
-			for (int j = 0; j < k; j++){
-				for (int r = 0; r < m1; r++){
-					a[i][j] = a[i][j] + a1[i][r] * c[r][j];
-				}
-			}
-		}
-		delete_matrix(c, m1);
-		delete_matrix(a1, n);
+	for (int i = 0; i < n; i++) { 
+    		for (int j = 0; j < k; j++) { 
+        		for (int r = 0; r < m; r++) { 
+		    	c[i][j] = a[i][r] * b[r][j];
+        		}
+    		}
 	}
-	else cout << "Wrong size" << endl;
+			
 }
-
+		
 void transpose_matrix(int **&a, int &n, int &m){
 	int **d = new int*[n];
 	for(int i = 0; i < n; i++)
@@ -351,7 +321,7 @@ int main(int argc, char *argv[]){
 		//n элементов в массиве, каждый из которых указывает какую-то (int) область памяти
 		//выделяю память для указателя на столбцы
 		//выделяю память на сами стобцы
-		int **a = new int*[n], counta = 0;		
+		int **a = new int*[n];		
 		for(int i = 0; i < n; i++)
 			//выделяем по i-ый столбец память з
 			a[i]=new int[m];
@@ -359,21 +329,34 @@ int main(int argc, char *argv[]){
 		for (int i = 0; i < n; i++)
 			for (int j = 0; j < m; j++)
 				a[i][j] = 0;
-			ё
-		int inpn = 0, inpm = 0, v = 0;
+		
+		//inpn - номер строки, inpm - номер стобца (индексы матрицы)
+		int inpn = 0, inpm = 0, v = 0;		
 		bool flag_matrix = true, flag_end_of_matrix = false, flag_total_count = true;
 		if (zapyataya == true){
+			
+			int counta = 0;
+			//рассматриваем случай, когда параметры, которые задают содержимое матрицы, заданы через запятые
+			// проходим по каждому символу в строке
 				for (int i = 0; i < strlen(argv[2]); i++){
-					if (counta < n * m){
-						if ((argv[2][i] >= '0') && (argv[2][i] <= '9')) a[inpn][inpm] = a[inpn][inpm] * 10 + argv[2][i] - 48;
+					// i - это индекс символа в строке argv2
+					//здесь мы начинаем считывать очередной элемент в матрицу а
+					//counta текущий не нулевой элемент матрицы
+					if (counta < n * m){	
+						//если это цифра, то мы продолжаем считывать этот элемент матрицы и как только встречаем запятую, переходим к след.
+						if ((argv[2][i] >= '0') && (argv[2][i] <= '9')) a[inpn][inpm] = a[inpn][inpm] * 10 + argv[2][i] - '0';
+						//
 						else{
 							if (argv[2][i] == ','){
-								if ((inpm != m - 1) && (counta + 1 != n * m)){
+								//если текущий столбец не последний и текущий элемент, который мы заполняли не последний
+								if ((inpm != m - 1) && (counta != n * m - 1)){
+									//тогда переходим к след. элементу и столбцу, если что-то убрать то будем заполнять не по верному адресу
 									inpm++;
 									counta++;
 								}
 								else{
-									if (counta + 1 != n * m){
+									if (counta != n * m - 1){
+										//здесь мы дошли до конца первой строки матрицы и переходим на новую
 										inpm = 0;
 										inpn++;
 										counta++;
@@ -390,27 +373,30 @@ int main(int argc, char *argv[]){
 				}
 		}
 		else{
+			//v - кол-во элементов матрицы, которые заданы из командной строки
+			// проверка на колво максимально возможных элементво в матрице
 			if (argc - 2 > n * m) v = n * m;
 			else v = argc - 2;
-			for (int i = 0; i < v; i++){
-				for (int j = 0; j < strlen(argv[i + 2]); j++){
-					if ((argv[i + 2][j] >= '0') && (argv[i + 2][j] <= '9'))
-						;
-					else flag_matrix = false;
+			for (int i = 0; i < v; i++){	//i номер элемента матрица из командно строки, пробегаем по элементам в командной строке			
+				//проверям что параметр argv i+2 состоит только из цифр
+				for (int j = 0; j < strlen(argv[i + 2]); j++){ //J индекс символа в строке
+					if ( !((argv[i + 2][j] >= '0') && (argv[i + 2][j] <= '9')) )
+						
+						flag_matrix = false;
 				}
+				//если матрица задана верна, то элемент матрицы из строкового вида переводим в обычное число типа int
 				if (flag_matrix == true) a[inpn][inpm] = atoi(argv[i + 2]);
-				if (inpm != m - 1){
+				//если столбец не последний, идем к след.
+				if (inpm != m - 1){					
 					inpm++;
-					counta++;
 				}
+				//но если последний стоблец, то 
 				else{
 					inpm = 0;
 					inpn++;
 				}
-			}
-			counta++;
-		}
-		if (flag_end_of_matrix == false) counta++;
+			}			
+		}		
 		
 		if ((flagn == false) || (flagm == false) || (flag_matrix == false)) cout << "You entered incorrect data" << endl;
 		else{
