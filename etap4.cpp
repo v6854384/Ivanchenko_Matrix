@@ -35,10 +35,9 @@ void sum_matrixs(int **a, int n, int m){
 }
 
 void multiplacation_matrixs(int **a, int n, int &m){
-	cout << "Input the number of columns of new matrix" << endl;
-	
+	cout << "Input the number of columns of new matrix" << endl;	
 	int k;
-		cin >> k;
+	cin >> k;
 	
 	cout << "Input matrix" << endl;
 	
