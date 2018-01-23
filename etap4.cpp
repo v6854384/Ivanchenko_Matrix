@@ -38,9 +38,7 @@ void multiplacation_matrixs(int **a, int n, int &m){
 	cout << "Input the number of columns of new matrix" << endl;	
 	int k;
 	cin >> k;
-	
-	cout << "Input matrix" << endl;
-	
+		
 	int **b = new int*[m];
 		for (int i = 0; i < m; i++){
    		 b[i] = new int[k];
@@ -50,6 +48,8 @@ void multiplacation_matrixs(int **a, int n, int &m){
 		for (int i = 0; i < m; i++){
    		 c[i] = new int[k];
 	}
+	
+	cout << "Input matrix" << endl;
 	
 	for (int i = 0; i < m; i++) { 
         	for (int j = 0; j < k; j++) { 
