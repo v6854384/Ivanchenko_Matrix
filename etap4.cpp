@@ -52,17 +52,17 @@ void multiplacation_matrixs(int **a, int n, int &m){
 	cout << "Input matrix" << endl;
 	
 	for (int i = 0; i < m; i++) { 
-        	for (int j = 0; j < k; j++) { 
+            for (int j = 0; j < k; j++) { 
             		cin >> b[i][j];
-
+	    }
+	}	
 	for (int i = 0; i < n; i++) { 
-    		for (int j = 0; j < k; j++) { 
+    	    for (int j = 0; j < k; j++) { 
         		for (int r = 0; r < m; r++) { 
 		    	c[i][j] = a[i][r] * b[r][j];
         		}
-    		}
-	}
-			
+    	    }
+	}		    			
 }
 		
 void transpose_matrix(int **&a, int &n, int &m){
