@@ -34,7 +34,7 @@ void sum_matrixs(int **a, int n, int m){
 	}	
 }
 
-void multiplacation_matrixs(int **&a, int n, int &m){
+void multiplacation_matrixs(int **&a, int &n, int &m){
 	cout << "Input the number of columns for new matrix" << endl;	
 	int k;
 	cin >> k;
@@ -55,7 +55,8 @@ void multiplacation_matrixs(int **&a, int n, int &m){
        		for (int j = 0; j < k; j++) { 
             		cin >> b[i][j];
 	   	}
-	}	
+	}
+	//здесь перемножаются матрицы А и В, и записываются в матрицу С
 	for (int i = 0; i < n; i++) { 
     		for (int j = 0; j < k; j++) { 
 			c[i][j] = 0;
@@ -64,10 +65,10 @@ void multiplacation_matrixs(int **&a, int n, int &m){
         		}
     	    	}
 	}
-	int new_n = n, new_m = k;
-	delete_matrix(a, n, m);
-	delete_matrix(b, m, k);
-	a = c;
+	int new_n = n, new_m = k; //новые размеры матрицы и чтобы не потерять значения n и m, после удаления матриц а и b значения n и m останутся старыми
+	delete_matrix(a, n, m); //очищаем память, выделенную под  матрицу а
+	delete_matrix(b, m, k); //очищаем память, выделенную под  матрицу b
+	a = c; //здесь мы говорим что С указывает в памяти туда же, куда и А, то есть А и С указывают на одни и те же данные
 	n = new_n;
 	m = new_m;	
 }
